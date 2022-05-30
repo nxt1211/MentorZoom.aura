@@ -136,7 +136,7 @@ export const likePost =
     });
     socket.emit("likePost", newPost);
     try {
-      await patchDataAPI(`/post/${post._id}/like`, null, auth.token);
+      await patchDataAPI(`post/${post._id}/like`, null, auth.token);
       //Notify
 
       const msg = {

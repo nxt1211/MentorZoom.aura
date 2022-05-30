@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Menu from "./Menu";
 import Search from "./Search";
-import logo from "../../images/logo.png";
+import logo from "../../images/mentorzoom.png";
 
 const Header = () => {
   return (
@@ -15,7 +15,7 @@ const Header = () => {
             <img
               src={logo}
               alt={logo}
-              style={{ width: "50px", height: "50px" }}
+              style={{ width: "66px", height: "70px" }}
             />
           </h1>
         </Link>

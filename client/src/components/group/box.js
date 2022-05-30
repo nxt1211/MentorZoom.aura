@@ -19,26 +19,25 @@ const Box = () => {
   const dispatch = useDispatch();
 
   const userOption = ListUserF.userFostech.map((opt) => ({
-    label: opt.email,
-    value: opt.email,
+    label: opt,
+    value: opt,
   }));
 
-  //console.log(userOption);
+  // console.log(userOption);
   const userFostech = arrayUser.map((item) => item.value);
 
-  const token = localStorage.getItem("@token_key");
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (statusZoom) {
-      await dispatch(editGroup(Groups.deGroup.id, { nameGroup, maZoom }));
-      dispatch(getGroups(token));
+      // await dispatch(editGroup(Groups.deGroup.id, { nameGroup, maZoom }));
+      // dispatch(getGroups(token));
       dispatch({ type: GLOBALTYPES.STATUSZOOM, payload: false });
     } else {
-      await dispatch(addGroup({ auth, nameGroup, maZoom, userFostech, token }));
+      await dispatch(addGroup({ auth, nameGroup, maZoom, userFostech }));
       setNameGroup("");
       setMaZoom("");
       setArrayUser([]);
-      dispatch(getGroups(token));
+      dispatch(getGroups(auth.token));
     }
   };
   const handleCancel = () => {
@@ -60,7 +59,7 @@ const Box = () => {
       className="card d-flex"
       style={{ width: "18rem", justifyContent: "center" }}>
       <div className="color mt-0 p-3 bg-info text-light">
-        {statusZoom ? "Chỉnh sửa" : "Tạo phòng"}
+        {statusZoom ? "Chỉnh sửa" : "Tạo nhóm"}
       </div>
 
       <div className="card-body">
@@ -78,7 +77,7 @@ const Box = () => {
         <input
           className="form-control mt-1"
           type="text"
-          placeholder="Mã phòng"
+          placeholder="Mã nhóm"
           value={maZoom}
           onChange={(e) => setMaZoom(e.target.value)}
         />
@@ -92,17 +91,11 @@ const Box = () => {
           onChange={(opt) => setArrayUser(opt)}
         />
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <button
-            onClick={handleSubmit}
-            type="button"
-            className="btn btn-primary mt-2">
-            {statusZoom ? "Sửa thông tin" : "Thêm nhóm"}
+          <button onClick={handleSubmit} type="button" className="btn  mt-2">
+            {statusZoom ? "Sửa thông tin" : "Thêm"}
           </button>
           {statusZoom && (
-            <button
-              onClick={handleCancel}
-              type="button"
-              className="btn btn-primary mt-2">
+            <button onClick={handleCancel} type="button" className="btn  mt-2">
               Đóng
             </button>
           )}

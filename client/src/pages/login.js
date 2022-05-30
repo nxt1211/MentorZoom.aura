@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { login } from "../redux/actions/authAction";
+import logo from "../../src/images/mentorzoom.png";
 
 const Login = () => {
   const initialState = { email: "", password: "" };
@@ -21,7 +22,7 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    dispatch(login(userData));
   };
   useEffect(() => {
     if (auth.token) history.push("/");
@@ -29,57 +30,80 @@ const Login = () => {
   return (
     <div className="auth_page">
       <form onSubmit={handleSubmit} method="POST">
-        <h3
-          className="text-uppercase text-center mb-4"
-          style={{ color: "cornflowerblue" }}>
-          Zahu
-        </h3>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}>
+          <img
+            className="text-uppercase text-center mb-0"
+            src={logo}
+            alt={logo}
+            style={{ width: "50%", height: "50%" }}
+          />
+        </div>
+        {/* {/* <h3
+          className="text-uppercase text-center mb-0"
+          style={{ color: "Crimson" }}>
+          AURA CAPITAL
+        </h3> */}
+        {/* <h5 className=" text-center mb-4 text-warning">MentorZoom</h5> */}
         <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email address</label>
+          <label
+            htmlFor="exampleInputEmail1"
+            className="text-light font-weight-bold">
+            Email*
+          </label>
           <input
             type="email"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            placeholder="Nhập email"
             onChange={handleChangeInput}
             name="email"
             value={email}
           />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
         </div>
         <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
+          <label
+            htmlFor="exampleInputPassword1"
+            className="text-light font-weight-bold">
+            Mật khẩu*
+          </label>
           <div className="pass">
             <input
               type={typePass ? "text" : "password"}
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleChangeInput}
+              placeholder="Nhập mật khẩu"
               name="password"
               value={password}
               autoComplete="off"
             />
             <small onClick={() => setTypePass(!typePass)}>
               {typePass ? (
-                <span className="material-icons">visibility_off</span>
+                <span className="material-icons text-light">
+                  visibility_off
+                </span>
               ) : (
-                <span className="material-icons">visibility</span>
+                <span className="material-icons text-light">visibility</span>
               )}
             </small>
           </div>
         </div>
         <button
           type="submit"
-          className="btn btn-primary  w-100"
+          className="btn w-100 font-weight-bold"
           disabled={email && password ? false : true}>
-          Login
+          Đăng nhập
         </button>
-        <p className="my-2">
-          You don't have an account ?{" "}
-          <Link to="/register" style={{ color: "crimson" }}>
-            Register Now
+        <p className="my-2 text-light font-weight-bold">
+          Bạn chưa có tài khoản?{" "}
+          <Link to="/register" style={{ color: "yellow", fontWeight: "bold" }}>
+            Đăng kí ngay
           </Link>
         </p>
       </form>
